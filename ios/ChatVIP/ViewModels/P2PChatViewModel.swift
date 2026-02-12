@@ -51,20 +51,21 @@ final class P2PChatViewModel: ObservableObject {
         MessageServerHolder.shared.connect(serverUrl: self.serverUrl, myPhone: self.myPhone)
         MessageServerHolder.shared.connectionStatus
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.connectionState = $0.isEmpty ? "Desconectado" : $0
-                self?.isConnecting = $0 == "Conectando..."
+            .sink { [weak self] status in
+                self?.connectionState = status.isEmpty ? "Desconectado" : status
+                self?.isConnecting = status == "Conectando..."
             }
             .store(in: &cancellables)
         GlobalMessageManager.shared.messageReceivedFlow
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] chatId, msg in
+            .sink { [weak self] pair in
+                let (chatId, msg) = pair
                 if chatId == self?.conversationId() {
                     self?.addMessage(msg)
                 }
             }
             .store(in: &cancellables)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             MessageServerHolder.shared.requestSync(since: "1970-01-01")
         }
     }
@@ -118,7 +119,6 @@ final class P2PChatViewModel: ObservableObject {
         }
     }
 
-
     func toggleRecording() {
         if isRecording {
             stopRecording()
@@ -162,7 +162,7 @@ final class P2PChatViewModel: ObservableObject {
     }
 
     private func saveMessageLocally(_ m: Message) {
-        var conv = storage.loadConversation(conversationId())
+        let conv = storage.loadConversation(conversationId())
         let convData: ConversationData
         if var c = conv {
             c.messages.append(storage.messageToJson(m))

@@ -47,14 +47,15 @@ final class JsonStorage {
 
     func saveConversation(_ conv: ConversationData) {
         if let data = try? encoder.encode(conv),
-           let encrypted = EncryptedStorage.encrypt(String(data: data, encoding: .utf8)) {
+           let jsonStr = String(data: data, encoding: .utf8),
+           let encrypted = EncryptedStorage.encrypt(jsonStr) {
             try? encrypted.write(to: convFileURL(conv.id), atomically: true, encoding: .utf8)
         }
     }
 
     func loadConversation(_ id: String) -> ConversationData? {
         let url = convFileURL(id)
-        guard let encrypted = try? String(contentsOf: url),
+        guard let encrypted = try? String(contentsOf: url, encoding: .utf8),
               let decrypted = EncryptedStorage.decrypt(encrypted),
               let data = decrypted.data(using: .utf8) else { return nil }
         return try? decoder.decode(ConversationData.self, from: data)
@@ -86,7 +87,7 @@ final class JsonStorage {
     // MARK: - Contacts
     private var contactsURL: URL { filesDir.appendingPathComponent("contacts.json") }
 
-    func saveContactName(phone: String, name: String) {
+    func saveContactName(_ phone: String, _ name: String) {
         var contacts = loadContacts()
         contacts[phone] = name.trimmingCharacters(in: .whitespaces)
         if let data = try? encoder.encode(contacts) {
@@ -102,7 +103,7 @@ final class JsonStorage {
         return decoded
     }
 
-    func getContactName(phone: String) -> String? { loadContacts()[phone] }
+    func getContactName(_ phone: String) -> String? { loadContacts()[phone] }
 
     func messageToJson(_ m: Message) -> MessageJson {
         MessageJson(

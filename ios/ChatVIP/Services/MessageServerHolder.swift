@@ -30,7 +30,7 @@ final class MessageServerHolder {
 
     func connect(serverUrl: String, myPhone: String) {
         let normalized = myPhone.trimmingCharacters(in: .whitespaces)
-        let phone = normalized.first?.isNumber == true ? "+\(normalized)" : normalized
+        let phone = normalized.first?.isWholeNumber == true ? "+\(normalized)" : normalized
 
         client?.disconnect()
         let wrapper = ListenerWrapper(holder: self)
@@ -83,8 +83,4 @@ final class MessageServerHolder {
             holder?.errorFlow.send("Error: Nodo servidor no activo")
         }
     }
-}
-
-extension Character {
-    var isNumber: Bool { isWholeNumber }
 }

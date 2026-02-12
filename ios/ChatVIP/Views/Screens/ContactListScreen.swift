@@ -11,17 +11,12 @@ struct ContactListScreen: View {
     let onNavigateToChat: (String) -> Void
     let onNavigateToSetup: () -> Void
 
-    @StateObject private var viewModel = ContactListViewModel()
+    @StateObject private var viewModel = ContactListVM()
     @State private var showNewChat = false
     @State private var newChatNumber = ""
     @State private var newChatName = ""
     @State private var conversationToDelete: (String, String)?
-    @State private var serverErrorMessage: String?
     private let storage = JsonStorage()
-
-    private func subscribeToMessages() {
-        viewModel.subscribe(myPhone: myPhoneNumber)
-    }
 
     private func conversationId(me: String, other: String) -> String {
         let sorted = [me, other].sorted()
@@ -61,8 +56,11 @@ struct ContactListScreen: View {
                 PoweredByFooter()
             }
         }
-        .onAppear { connectToServer(); subscribeToMessages() }
-        .alert("Error de Conexión", isPresented: .init(
+        .onAppear {
+            viewModel.connectToServer()
+            viewModel.subscribe()
+        }
+        .alert("Error de Conexión", isPresented: Binding(
             get: { viewModel.serverErrorMessage != nil },
             set: { if !$0 { viewModel.serverErrorMessage = nil } }
         )) {
@@ -73,7 +71,7 @@ struct ContactListScreen: View {
         .sheet(isPresented: $showNewChat) {
             newChatSheet
         }
-        .alert("Eliminar conversación", isPresented: .init(
+        .alert("Eliminar conversación", isPresented: Binding(
             get: { conversationToDelete != nil },
             set: { if !$0 { conversationToDelete = nil } }
         )) {
@@ -214,20 +212,6 @@ struct ContactListScreen: View {
             }
         }
     }
-
-    private func connectToServer() {
-        let config = storage.loadP2PConfig()
-        guard let config = config else { return }
-        if MessageServerHolder.shared.isConnected() {
-            MessageServerHolder.shared.requestConversations()
-            return
-        }
-        MessageServerHolder.shared.connect(serverUrl: config.signalingServerUrl, myPhone: config.phoneNumber)
-        viewModel.connectToServer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            MessageServerHolder.shared.requestConversations()
-        }
-    }
 }
 
 extension Array {
@@ -237,10 +221,11 @@ extension Array {
     }
 }
 
-private class ContactListViewModel: ObservableObject {
+class ContactListVM: ObservableObject {
     @Published var serverConversations: [String] = []
     @Published var connectionStatus = ""
     @Published var refreshId = 0
+    @Published var serverErrorMessage: String?
     private let storage = JsonStorage()
     private var cancellables = Set<AnyCancellable>()
 
@@ -261,14 +246,14 @@ private class ContactListViewModel: ObservableObject {
             .store(in: &cancellables)
         MessageServerHolder.shared.errorFlow
             .receive(on: DispatchQueue.main)
-            .sink { _ in }
+            .sink { [weak self] in self?.serverErrorMessage = $0 }
             .store(in: &cancellables)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             MessageServerHolder.shared.requestConversations()
         }
     }
 
-    func subscribe(myPhone: String) {
+    func subscribe() {
         GlobalMessageManager.shared.messageReceivedFlow
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.triggerRefresh() }

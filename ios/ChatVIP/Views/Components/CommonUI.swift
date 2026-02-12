@@ -5,39 +5,6 @@
 
 import SwiftUI
 
-struct ChatVIPHeader<Title: View>: View {
-    let title: Title
-    var navigationIcon: (() -> Void)?
-    var actions: () -> AnyView
-
-    init(
-        @ViewBuilder title: () -> Title,
-        navigationIcon: (() -> Void)? = nil,
-        @ViewBuilder actions: @escaping () -> some View = { EmptyView() }
-    ) {
-        self.title = title()
-        self.navigationIcon = navigationIcon
-        self.actions = { AnyView(actions()) }
-    }
-
-    var body: some View {
-        HStack {
-            if let nav = navigationIcon {
-                Button(action: nav) {
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                }
-            }
-            Spacer()
-            title
-            Spacer()
-            actions()
-        }
-        .padding()
-        .background(Color(.systemBackground))
-    }
-}
-
 struct ChatVIPBackground: View {
     var body: some View {
         GeometryReader { geo in

@@ -7,7 +7,7 @@ import SwiftUI
 
 struct ChatBubble: View {
     let message: Message
-    let filesBaseURL: URL  // Documents directory - message.content is relative like "chatvip/img/xxx"
+    let filesBaseURL: URL
     @ObservedObject var audioController: AudioPlayerController
     var onDelete: (() -> Void)? = nil
     var onSave: (() -> Void)? = nil
@@ -29,10 +29,13 @@ struct ChatBubble: View {
         }
     }
 
+    private func resolveFileURL(_ relativePath: String) -> URL {
+        relativePath.split(separator: "/").reduce(filesBaseURL) { $0.appendingPathComponent(String($1)) }
+    }
+
     var body: some View {
         HStack {
             if message.type == .USER { Spacer(minLength: 40) }
-            if message.type == .AI || message.type == .SYSTEM { Spacer(minLength: 40) }
 
             VStack(alignment: message.type == .SYSTEM ? .center : (message.type == .USER ? .trailing : .leading), spacing: 4) {
                 bubbleContent
@@ -45,8 +48,8 @@ struct ChatBubble: View {
                     Button("Ver / Zoom") { onViewZoom?() }
                     Button("Guardar en galería") { onSave?() }
                 } else if message.contentType == .audio {
-                        Button("Reproducir") {
-                        let file = message.content.split(separator: "/").reduce(filesBaseURL) { $0.appendingPathComponent(String($1)) }
+                    Button("Reproducir") {
+                        let file = resolveFileURL(message.content)
                         audioController.playOrPause(file: file, messageId: message.id)
                     }
                     Button("Guardar") { onSave?() }
@@ -56,7 +59,6 @@ struct ChatBubble: View {
                 Button("Eliminar", role: .destructive) { onDelete?() }
             }
 
-            if message.type == .USER { Spacer(minLength: 40) }
             if message.type == .AI || message.type == .SYSTEM { Spacer(minLength: 40) }
         }
         .padding(.horizontal, 16)
@@ -67,7 +69,7 @@ struct ChatBubble: View {
     private var bubbleContent: some View {
         switch message.contentType {
         case .image:
-            let fileURL = message.content.split(separator: "/").reduce(filesBaseURL) { $0.appendingPathComponent(String($1)) }
+            let fileURL = resolveFileURL(message.content)
             if FileManager.default.fileExists(atPath: fileURL.path),
                let uiImage = UIImage(contentsOfFile: fileURL.path) {
                 Image(uiImage: uiImage)
@@ -88,8 +90,8 @@ struct ChatBubble: View {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         Button {
-                            let file = filesBaseURL.appendingPathComponent(message.content)
-                            controller.playOrPause(file: file, messageId: message.id)
+                            let file = resolveFileURL(message.content)
+                            audioController.playOrPause(file: file, messageId: message.id)
                         } label: {
                             Image(systemName: audioController.isPlaying ? "pause.circle.fill" : "play.circle.fill")
                                 .font(.title2)
@@ -119,7 +121,7 @@ struct ChatBubble: View {
                 }
                 .foregroundColor(textColor)
                 .onTapGesture {
-                    let file = message.content.split(separator: "/").reduce(filesBaseURL) { $0.appendingPathComponent(String($1)) }
+                    let file = resolveFileURL(message.content)
                     audioController.playOrPause(file: file, messageId: message.id)
                 }
             }

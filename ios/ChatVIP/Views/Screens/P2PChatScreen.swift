@@ -5,7 +5,6 @@
 
 import SwiftUI
 import PhotosUI
-import AVFoundation
 
 struct P2PChatScreen: View {
     let peerPhone: String
@@ -13,6 +12,7 @@ struct P2PChatScreen: View {
 
     @StateObject private var viewModel: P2PChatViewModel
     @State private var imageFileToView: URL?
+    @State private var selectedItem: PhotosPickerItem?
     private let storage = JsonStorage()
     private let mediaStorage = MediaStorage()
 
@@ -45,46 +45,23 @@ struct P2PChatScreen: View {
                         .padding(.horizontal)
                 }
                 messagesList
-                MessageBar(
-                    value: $viewModel.inputText,
-                    onSend: { viewModel.sendMessage(viewModel.inputText) },
-                    onPickImage: { viewModel.showImagePicker = true },
-                    onRecordAudio: { viewModel.toggleRecording() },
-                    isRecordingAudio: viewModel.isRecording,
-                    enabled: true
-                )
+                bottomBar
             }
         }
+        .navigationBarHidden(true)
         .fullScreenCover(item: Binding(
             get: { imageFileToView.map { IdentifiableURL(url: $0) } },
             set: { imageFileToView = $0?.url }
         )) { item in
             FullScreenImageViewer(imageFile: item.url, onDismiss: { imageFileToView = nil })
         }
-        .sheet(isPresented: Binding(
-            get: { viewModel.showImagePicker },
-            set: { viewModel.showImagePicker = $0 }
-        )) {
-            PhotosPicker(
-                selection: Binding(
-                    get: { viewModel.selectedPhotoItem },
-                    set: { viewModel.selectedPhotoItem = $0 }
-                ),
-                matching: .images
-            ) {
-                Text("Elegir imagen")
-            }
-            .photosPickerStyle(.inline)
-            .onDisappear { viewModel.showImagePicker = false }
-        }
-        .onChange(of: viewModel.selectedPhotoItem) { _, newItem in
+        .onChange(of: selectedItem) { newItem in
             guard let item = newItem else { return }
             item.loadTransferable(type: Data.self) { result in
                 if case .success(let data) = result, let data = data {
                     DispatchQueue.main.async {
                         viewModel.sendImage(data)
-                        viewModel.selectedPhotoItem = nil
-                        viewModel.showImagePicker = false
+                        selectedItem = nil
                     }
                 }
             }
@@ -95,6 +72,30 @@ struct P2PChatScreen: View {
             }
         }
         .onDisappear { viewModel.cleanup() }
+    }
+
+    private var bottomBar: some View {
+        HStack(alignment: .bottom, spacing: 8) {
+            PhotosPicker(selection: $selectedItem, matching: .images) {
+                Image(systemName: "photo")
+                    .font(.title2)
+            }
+            Button(action: { viewModel.toggleRecording() }) {
+                Image(systemName: viewModel.isRecording ? "stop.circle.fill" : "mic.fill")
+                    .font(.title2)
+            }
+            TextField("Escribe tu mensaje...", text: $viewModel.inputText, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .lineLimit(1...4)
+            Button(action: { viewModel.sendMessage(viewModel.inputText) }) {
+                Image(systemName: "arrow.up.circle.fill")
+                    .font(.title)
+                    .foregroundColor(viewModel.inputText.isEmpty ? .gray : .accentColor)
+            }
+            .disabled(viewModel.inputText.trimmingCharacters(in: .whitespaces).isEmpty)
+        }
+        .padding(8)
+        .background(Color(.systemBackground))
     }
 
     private var header: some View {
