@@ -1,0 +1,45 @@
+name: Build iOS
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
+
+      - name: Build
+        run: |
+          cd ios
+          xcodebuild -project ChatVIP.xcodeproj \
+            -scheme ChatVIP \
+            -sdk iphoneos \
+            -configuration Release \
+            -arch arm64 \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -derivedDataPath build
+        continue-on-error: true
+
+      - name: Create IPA
+        if: success()
+        run: |
+          cd ios
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/ChatVIP.app Payload/
+          zip -r ChatVIP.ipa Payload
+          rm -rf Payload
+
+      - name: Upload IPA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ChatVIP-iOS
+          path: ios/ChatVIP.ipa

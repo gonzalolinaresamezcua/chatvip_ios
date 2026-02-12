@@ -1,0 +1,9 @@
+{
+  "name": "chatp2-message-server",
+  "version": "1.0.0",
+  "description": "Servidor centro de mensajes WebSocket",
+  "main": "server.js",
+  "dependencies": {
+    "ws": "^8.14.2"
+  }
+}

@@ -1,0 +1,20 @@
+# Build
+.DS_Store
+build/
+*.xcuserstate
+*.xcworkspace
+!default.xcworkspace
+DerivedData/
+
+# Android (si se incluye)
+*.iml
+.gradle
+/local.properties
+/.idea
+*.apk
+.externalNativeBuild
+.cxx
+/captures
+
+# Dependencies
+node_modules/

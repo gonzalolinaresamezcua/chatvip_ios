@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001 /* ChatVIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001 /* ChatVIPApp.swift */; };
+		A1000002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002 /* RootView.swift */; };
+		A1000003 /* PhoneSetupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000003 /* PhoneSetupScreen.swift */; };
+		A1000004 /* ContactListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000004 /* ContactListScreen.swift */; };
+		A1000005 /* P2PChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000005 /* P2PChatScreen.swift */; };
+		A1000006 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000006 /* ChatBubble.swift */; };
+		A1000007 /* MessageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000007 /* MessageBar.swift */; };
+		A1000008 /* CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000008 /* CommonUI.swift */; };
+		A1000009 /* FullScreenImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000009 /* FullScreenImageViewer.swift */; };
+		A1000010 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000010 /* AudioPlayerController.swift */; };
+		A1000011 /* P2PChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000011 /* P2PChatViewModel.swift */; };
+		A1000012 /* P2PConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000012 /* P2PConfig.swift */; };
+		A1000013 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000013 /* Message.swift */; };
+		A1000014 /* JsonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000014 /* JsonStorage.swift */; };
+		A1000015 /* EncryptedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000015 /* EncryptedStorage.swift */; };
+		A1000016 /* MediaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000016 /* MediaStorage.swift */; };
+		A1000017 /* MessageServerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000017 /* MessageServerClient.swift */; };
+		A1000018 /* MessageServerHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000018 /* MessageServerHolder.swift */; };
+		A1000019 /* GlobalMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000019 /* GlobalMessageManager.swift */; };
+		A1000020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2000020 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A2000001 /* ChatVIPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVIPApp.swift; sourceTree = "<group>"; };
+		A2000002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		A2000003 /* PhoneSetupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSetupScreen.swift; sourceTree = "<group>"; };
+		A2000004 /* ContactListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListScreen.swift; sourceTree = "<group>"; };
+		A2000005 /* P2PChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PChatScreen.swift; sourceTree = "<group>"; };
+		A2000006 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
+		A2000007 /* MessageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBar.swift; sourceTree = "<group>"; };
+		A2000008 /* CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUI.swift; sourceTree = "<group>"; };
+		A2000009 /* FullScreenImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewer.swift; sourceTree = "<group>"; };
+		A2000010 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
+		A2000011 /* P2PChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PChatViewModel.swift; sourceTree = "<group>"; };
+		A2000012 /* P2PConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PConfig.swift; sourceTree = "<group>"; };
+		A2000013 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		A2000014 /* JsonStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonStorage.swift; sourceTree = "<group>"; };
+		A2000015 /* EncryptedStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedStorage.swift; sourceTree = "<group>"; };
+		A2000016 /* MediaStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaStorage.swift; sourceTree = "<group>"; };
+		A2000017 /* MessageServerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServerClient.swift; sourceTree = "<group>"; };
+		A2000018 /* MessageServerHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServerHolder.swift; sourceTree = "<group>"; };
+		A2000019 /* GlobalMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMessageManager.swift; sourceTree = "<group>"; };
+		A2000020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2000030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3000001 /* ChatVIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatVIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A5000001 = {
+			isa = PBXGroup;
+			children = (
+				A5000002 /* ChatVIP */,
+				A5000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A5000002 /* ChatVIP */ = {
+			isa = PBXGroup;
+			children = (
+				A2000001 /* ChatVIPApp.swift */,
+				A5000004 /* Models */,
+				A5000005 /* Services */,
+				A5000006 /* ViewModels */,
+				A5000007 /* Views */,
+				A2000020 /* Assets.xcassets */,
+				A2000030 /* Info.plist */,
+			);
+			path = ChatVIP;
+			sourceTree = "<group>";
+		};
+		A5000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3000001 /* ChatVIP.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A2000012 /* P2PConfig.swift */,
+				A2000013 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A5000005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A2000014 /* JsonStorage.swift */,
+				A2000015 /* EncryptedStorage.swift */,
+				A2000016 /* MediaStorage.swift */,
+				A2000017 /* MessageServerClient.swift */,
+				A2000018 /* MessageServerHolder.swift */,
+				A2000019 /* GlobalMessageManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A5000006 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A2000011 /* P2PChatViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A5000007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A2000002 /* RootView.swift */,
+				A5000008 /* Screens */,
+				A5000009 /* Components */,
+				A5000010 /* Utils */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A5000008 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A2000003 /* PhoneSetupScreen.swift */,
+				A2000004 /* ContactListScreen.swift */,
+				A2000005 /* P2PChatScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		A5000009 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A2000006 /* ChatBubble.swift */,
+				A2000007 /* MessageBar.swift */,
+				A2000008 /* CommonUI.swift */,
+				A2000009 /* FullScreenImageViewer.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A5000010 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A2000010 /* AudioPlayerController.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A6000001 /* ChatVIP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7000003 /* Build configuration list for PBXNativeTarget "ChatVIP" */;
+			buildPhases = (
+				A6000002 /* Sources */,
+				A4000001 /* Frameworks */,
+				A6000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChatVIP;
+			productName = ChatVIP;
+			productReference = A3000001 /* ChatVIP.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A8000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = A7000001 /* Build configuration list for PBXProject "ChatVIP" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = es;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				es,
+			);
+			mainGroup = A5000001;
+			productRefGroup = A5000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A6000001 /* ChatVIP */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A6000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000020 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A6000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001 /* ChatVIPApp.swift in Sources */,
+				A1000002 /* RootView.swift in Sources */,
+				A1000003 /* PhoneSetupScreen.swift in Sources */,
+				A1000004 /* ContactListScreen.swift in Sources */,
+				A1000005 /* P2PChatScreen.swift in Sources */,
+				A1000006 /* ChatBubble.swift in Sources */,
+				A1000007 /* MessageBar.swift in Sources */,
+				A1000008 /* CommonUI.swift in Sources */,
+				A1000009 /* FullScreenImageViewer.swift in Sources */,
+				A1000010 /* AudioPlayerController.swift in Sources */,
+				A1000011 /* P2PChatViewModel.swift in Sources */,
+				A1000012 /* P2PConfig.swift in Sources */,
+				A1000013 /* Message.swift in Sources */,
+				A1000014 /* JsonStorage.swift in Sources */,
+				A1000015 /* EncryptedStorage.swift in Sources */,
+				A1000016 /* MediaStorage.swift in Sources */,
+				A1000017 /* MessageServerClient.swift in Sources */,
+				A1000018 /* MessageServerHolder.swift in Sources */,
+				A1000019 /* GlobalMessageManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A7000002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+			};
+			name = Debug;
+		};
+		A7000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7000006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ChatVIP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chat VIP";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.empresa.chatia;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1,2;
+			};
+			name = Debug;
+		};
+		A7000007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ChatVIP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chat VIP";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.empresa.chatia;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1,2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7000001 /* Build configuration list for PBXProject "ChatVIP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7000002 /* Debug */,
+				A7000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7000003 /* Build configuration list for PBXNativeTarget "ChatVIP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7000006 /* Debug */,
+				A7000007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A8000001 /* Project object */;
+}
