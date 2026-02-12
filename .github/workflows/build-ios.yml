@@ -19,23 +19,27 @@ jobs:
             -sdk iphoneos \
             -configuration Release \
             -arch arm64 \
-            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_IDENTITY="-" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
+            DEVELOPMENT_TEAM="" \
             -derivedDataPath build
-        continue-on-error: true
 
       - name: Create IPA
-        if: success()
         run: |
           cd ios
+          APP_PATH=$(find build -name "ChatVIP.app" -type d 2>/dev/null | head -1)
+          if [ -z "$APP_PATH" ]; then
+            echo "ChatVIP.app no encontrado. Estructura de build:"
+            find build -type d 2>/dev/null | head -30
+            exit 1
+          fi
           mkdir -p Payload
-          cp -r build/Build/Products/Release-iphoneos/ChatVIP.app Payload/
+          cp -r "$APP_PATH" Payload/
           zip -r ChatVIP.ipa Payload
           rm -rf Payload
 
       - name: Upload IPA
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: ChatVIP-iOS
